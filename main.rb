@@ -1,6 +1,8 @@
 require 'dotenv'
 require 'salesforce_bulk'
 require 'pp'
+require 'savon'
+require_relative 'sforce_wrapper'
 Dotenv.load ".env"
 
 fields = [
@@ -31,11 +33,17 @@ fields = [
 "RecordType.Name"
 ]
 
+fields = [
+	"id","name","createddate"
+]
+
+
 pp fields
 
 salesforce = SalesforceBulk::Api.new(ENV["SFDC_ID"], ENV["SFDC_PW"])
-res = salesforce.query("Account", "select id, name, createddate from Account limit 3")
-puts res.result.records.inspect
+res = salesforce.query("Account", "select " + fields.join(",") + " from Account limit 3")
+File.write('export.csv', fields.join(",") +" \n "+ res.result.raw)
 
 
-File.write('export.csv', res.result.raw)
+s = SforceWrapper.new(ENV["WAVE_ID"], ENV["WAVE_PW"])
+
