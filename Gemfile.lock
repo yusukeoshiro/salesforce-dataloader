@@ -1,0 +1,17 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    dotenv (2.1.1)
+    salesforce_bulk (1.0.3)
+      xml-simple
+    xml-simple (1.1.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  dotenv
+  salesforce_bulk
+
+BUNDLED WITH
+   1.11.2
