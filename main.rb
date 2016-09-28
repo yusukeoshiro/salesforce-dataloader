@@ -45,6 +45,7 @@ fields = [
 
 
 # EXTRACT DATA FROM SOURCE ORG
+=begin
 	salesforce = SalesforceBulk::Api.new(ENV["SFDC_ID"], ENV["SFDC_PW"])
 	res = salesforce.query("Account", "select " + fields.join(",") + " from Account")
 	File.delete('export.csv') if File.exist?('export.csv')
@@ -53,14 +54,14 @@ fields = [
 		fields[i] = '"'+ field +'"'
 	end
 	File.write('export.csv', fields.join(",") +"\n"+ res.result.raw)
-
+=end
 
 
 # CONNECT TO WAVE INSTANCE
 	s = SforceWrapper.new(ENV["WAVE_ID"], ENV["WAVE_PW"])
 
 # SPLIT FILES INTO CHUNKS
-	file = File.open("export.csv", "r")
+	file = File.open("extract.csv", "r")
 	index_of_files = 0
 	tmp = File.open(index_of_files.to_s, "a")	
 	
@@ -75,14 +76,14 @@ fields = [
 	end
 	file.close
 	p index_of_files
-	File.delete('export.csv') if File.exist?('export.csv')
+	File.delete('extract.csv') if File.exist?('extract.csv')
 
 
 # CREATE HEADER
-	meta_json = Base64.encode64(File.read("export.json"))
+	meta_json = Base64.encode64(File.read("extract.json"))
 	payload = {
 		"Format" => "Csv",
-		"EdgemartAlias" => "myTest",
+		"EdgemartAlias" => "Opps",
 		"MetadataJson" => meta_json,
 		"Operation" => "Overwrite",
 		"Action" => "None"
