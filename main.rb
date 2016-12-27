@@ -11,52 +11,6 @@ Dotenv.load ".env"
 FILE_MAX_SIZE = 5242880
 
 
-fields = [
-"Id",
-"AccountId",
-"RecordTypeId",
-"Name",
-"StageName",
-"Amount",
-"CloseDate",
-"Type",
-"IsClosed",
-"IsWon",
-"CurrencyIsoCode",
-"AmountConverted__c",
-"Premier_Specialist__c",
-"IsPremierUpsell__c",
-"Premier_Status__c",
-"Premier_Reason_for_Loss__c",
-"Premier_Notes_Next_Steps__c",
-"IsPremier_Attached__c",
-"Owner.Name",
-"Owner.UserRoleId",
-"Owner.UserRole.Name",
-"Owner.ManagerId",
-"Owner.Manager.Name",
-"Account.Name",
-"RecordType.Name"
-]
-
-fields = [
-	"id","name","createddate"
-]
-
-
-# EXTRACT DATA FROM SOURCE ORG
-=begin
-	salesforce = SalesforceBulk::Api.new(ENV["SFDC_ID"], ENV["SFDC_PW"])
-	res = salesforce.query("Account", "select " + fields.join(",") + " from Account")
-	File.delete('export.csv') if File.exist?('export.csv')
-
-	fields.each_with_index do |field, i|
-		fields[i] = '"'+ field +'"'
-	end
-	File.write('export.csv', fields.join(",") +"\n"+ res.result.raw)
-=end
-
-
 # CONNECT TO WAVE INSTANCE
 	s = SforceWrapper.new(ENV["WAVE_ID"], ENV["WAVE_PW"])
 
