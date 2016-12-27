@@ -8,3 +8,8 @@ In order for this to work:
 * Place the source csv file at the root path of the app (Make sure it is called extract.csv)
 * Place the metadata file (in json) at the root path of the app (Make sure it is called extract.json)
 
+### If you making this run in conjunction with dataloader
+You will need to build dataloader. Follow the instruction on this repo. [link](https://github.com/forcedotcom/dataloader). 
+Hint:
+* Encrypt your password using the provided tool
+* Create process-conf.xml file that looks like the one in sample folder

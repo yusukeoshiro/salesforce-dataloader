@@ -1,0 +1,24 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="PROCESS_ID"
+          class="com.salesforce.dataloader.process.ProcessRunner"
+          singleton="false">
+        <description>PROCESS_DESCRIPTION</description>
+        <property name="name" value="PROCESS_ID"/>
+        <property name="configOverrideMap">
+            <map>
+                <entry key="sfdc.endpoint" value="https://www.salesforce.com"/>
+                <entry key="sfdc.username" value="USER_ID"/>
+                <entry key="sfdc.password" value="USER_PW_ENCRYPTED"/>
+                <entry key="sfdc.entity" value="Opportunity"/>
+                <entry key="process.operation" value="extract"/>
+				<entry key="sfdc.extractionSOQL" value="SELECT Id, AccountId, FROM Opportunity"/>
+                <entry key="dataAccess.name"   value="~/dataloader/extract.csv"/>
+                <entry key="process.outputError"   value="~/dataloader/error.csv"/>
+                <entry key="process.outputSuccess" value="~/dataloader/success.csv"/>
+                <entry key="dataAccess.type" value="csvWrite" />                
+            </map>
+        </property>
+   </bean> 
+   
+</beans>
